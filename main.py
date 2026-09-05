@@ -120,16 +120,16 @@ def setup_logging():
 def get_exchange():
     """
     Uses the dedicated binanceusdm class for Binance USDT-margined futures.
-    This is ccxt's current recommended way to reach this market, the older
-    ccxt.binance({'options': {'defaultType': 'future'}}) pattern has been
-    deprecated. API key/secret are only required if you later add private
-    endpoints (orders, balances); public market data does not need them.
+    This is ccxt's current recommended way to reach this market.
     """
     exchange = ccxt.binanceusdm(
         {
             "apiKey": BINANCE_API_KEY,
             "secret": BINANCE_API_SECRET,
             "enableRateLimit": True,
+            "options": {
+                "adjustForTimeDifference": True,  # সার্ভারের সময়ের ব্যবধান ঠিক রাখবে
+            }
         }
     )
     return exchange
