@@ -119,17 +119,15 @@ def setup_logging():
 # ============================================================
 def get_exchange():
     """
-    Uses the dedicated binanceusdm class for Binance USDT-margined futures.
-    This is ccxt's current recommended way to reach this market.
+    Initializes binanceusdm purely in public mode. 
+    Bypasses API key checks and prevents IP restrictions.
     """
     exchange = ccxt.binanceusdm(
         {
-            "apiKey": BINANCE_API_KEY,
-            "secret": BINANCE_API_SECRET,
             "enableRateLimit": True,
             "options": {
-                "adjustForTimeDifference": True,  # সার্ভারের সময়ের ব্যবধান ঠিক রাখবে
-            }
+                "adjustForTimeDifference": True,
+            },
         }
     )
     return exchange
